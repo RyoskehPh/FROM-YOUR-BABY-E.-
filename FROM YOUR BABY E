@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en"> 
+ <head> 
+  <meta charset="UTF-8"> 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Valentine's Day Message</title> 
+  <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        h1 {
+            font-size: 32px;
+            font-weight: bold;
+            color: black;
+        }
+        p {
+            font-size: 18px;
+            color: black;
+            font-weight: normal;
+        }
+        #message {
+            font-size: 20px;
+            color: black;
+            font-weight: normal;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #ff4d6d;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: box-shadow 0.3s ease-in-out;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        button:hover {
+            box-shadow: 0px 0px 15px #ff4d6d;
+        }
+    </style> 
+ </head> 
+ <body> 
+  <h1>Even though we can't be together today, you are always in my heart.</h1> 
+  <p id="message"></p> 
+  <br> <button onclick="sendResponse('Yes')">Yes</button> <button onclick="sendResponse('No')">No</button> 
+  <script>
+        const text = "Your smile brightens my world, and I can't wait to see you again. Thank you for being the wonderful person that you are. I love you more than words can express. May your day be filled with love and happiness! Forever yours, asawa ko. Sorry if we couldn't meet on Valentine's Day itself. Is it okay if I invite you on a date tomorrow to make up for today? What matters most is that we celebrate, even if it's a little late, right?";
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                document.getElementById("message").innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 50); // Adjust speed of typing effect
+            }
+        }
+
+        function sendResponse(answer) {
+            fetch('https://api.example.com/valentine-response', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ response: answer })
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('Response sent!');
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        window.onload = typeWriter;
+    </script> 
+ </body>
+</html>
